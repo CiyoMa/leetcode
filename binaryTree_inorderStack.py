@@ -61,6 +61,19 @@ class Solution:
                 s.push(cur.left)
         return result
 
+    def postorderTraversal(self, root):
+        result = []
+        s = stack()
+        s.push(root)
+        while root and not s.isEmpty():
+            cur = s.pop()
+            result.append(cur.val)
+            if cur.right:
+                s.push(cur.right)
+            if cur.left:
+                s.push(cur.left)
+        return result
+        
 t1 = TreeNode(1)
 t2 = TreeNode(2)
 t3 = TreeNode(3)
