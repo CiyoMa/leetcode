@@ -12,10 +12,11 @@ class Solution:
     	t = [1 for i in range(n+1)]
         for i in range(2,n+1):
         	temp = 0
+        	#print '@', i
         	for j in range(i):
-        		print j+1, i-j-1
-        		temp += t[j+1] * t[i-j-1]
-        	print '#'
+        		#print j, i-j-1
+        		temp += t[j] * t[i-j-1]
+        	#print '#'
         	t[i] = temp
         return t[n]
 
