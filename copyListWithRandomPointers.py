@@ -28,8 +28,8 @@ class Solution:
     		t[cur] = newcur
 
     		cur = cur.next
-    	for i in t:
-    		print i, t[i]
+    	# for i in t:
+    	# 	print i, t[i]
     	cur = newHead
     	while cur is not None:
     		if cur.random is not None:
