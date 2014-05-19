@@ -4,7 +4,8 @@ class Solution:
     # @return an integer
     def canCompleteCircuit(self, gas, cost):
     	
-    	# Naive Way
+    	# Naive Way - TLE
+    	#
         # n = len(gas)
         # for start in range(n):
         # 	total = gas[start]
