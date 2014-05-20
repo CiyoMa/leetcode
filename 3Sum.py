@@ -17,38 +17,70 @@ The solution set must not contain duplicate triplets.
 class Solution:
     # @return a list of lists of length 3, [[val1,val2,val3]]
     def threeSum(self, num):
-    	num.sort()
-    	#print num
-    	l = len(num)
-    	i = 0
-    	result = []
+        num.sort()
+        #print num
+        result = []
 
-    	while i < l-2:
-    		if i != 0 and num[i] == num[i-1]:
-    		# remove duplicate result
-    			i += 1
-    			continue
-    		a = num[i]
-    		k = i + 1
-    		t = l - 1
-    		while k < t:
-    			b = num[k]
-    			c = num[t]
-    			if a+b+c == 0:
-    				result.append([a,b,c])
-    				k += 1
-    				t -= 1
-    				# -7,-6,1,2,3,4,5,6 => say k = 2, t = 6, 0=-6+1+5<=2+6, 
-    				# so next candidate will be some place between these two.
-    				while k<t and num[t] == num[t+1]: t -= 1
-    				while k<t and num[k] == num[k-1]: k += 1
-    			elif a+b+c > 0:
-    				t -= 1
-    			else:
-    				k += 1
-    		i += 1
-    	return result#[list(i) for i in list(result)]
-    	return list(result)
+        for i in range(len(num)-2):
+            if i != 0 and num[i-1] == num[i]:
+                continue
+
+            j = i + 1
+            jEnd = len(num) - 1
+            a = num[i] 
+            while j < jEnd:
+                b = num[j]
+                c = num[jEnd]
+                print a,b,c
+                if a + b + c == 0:
+                    result.append([a,b,c])
+                    j += 1
+                    jEnd -= 1
+                    while j < jEnd and num[j] == num[j-1]: j += 1
+                    while j < jEnd and num[jEnd] == num[jEnd+1]: jEnd -= 1
+                elif a + b + c > 0:
+                    jEnd -= 1
+                else:
+                    j += 1
+
+        return result
+
+# # AC Version
+# class Solution:
+#     # @return a list of lists of length 3, [[val1,val2,val3]]
+#     def threeSum(self, num):
+#     	num.sort()
+#     	#print num
+#     	l = len(num)
+#     	i = 0
+#     	result = []
+
+#     	while i < l-2:
+#     		if i != 0 and num[i] == num[i-1]:
+#     		# remove duplicate result
+#     			i += 1
+#     			continue
+#     		a = num[i]
+#     		k = i + 1
+#     		t = l - 1
+#     		while k < t:
+#     			b = num[k]
+#     			c = num[t]
+#     			if a+b+c == 0:
+#     				result.append([a,b,c])
+#     				k += 1
+#     				t -= 1
+#     				# -7,-6,1,2,3,4,5,6 => say k = 2, t = 6, 0=-6+1+5<=2+6, 
+#     				# so next candidate will be some place between these two.
+#     				while k<t and num[t] == num[t+1]: t -= 1
+#     				while k<t and num[k] == num[k-1]: k += 1
+#     			elif a+b+c > 0:
+#     				t -= 1
+#     			else:
+#     				k += 1
+#     		i += 1
+#     	return result#[list(i) for i in list(result)]
+#     	return list(result)
 
     # def binarySearch(self,num,start,end,target):
     # 	while start < end:
@@ -135,10 +167,11 @@ s = Solution()
 #A = [-13,10,11,-3,8,11,-4,8,12,-13,5,-6,-4,-2,12,11,7,-7,-3,10,12,13,-3,-2,6,-1,14,7,-13,8,14,-10,-4,10,-6,11,-2,-3,4,-13,0,-14,-3,3,-9,-6,-9,13,-6,3,1,-9,-6,13,-4,-15,-11,-12,7,-9,3,-2,-12,6,-15,-10,2,-2,-6,13,1,9,14,5,-11,-10,14,-5,11,-6,6,-3,-8,-15,-13,-4,7,13,-1,-9,11,-13,-4,-15,9,-4,12,-4,1,-9,-5,9,8,-14,-1,4,14]
 #A = [2,-8,8,6,-14,-12,11,-10,13,14,7,3,10,-13,3,-15,7,3,-11,-8,4,5,9,11,7,1,3,13,14,-13,3,-6,-6,-12,-15,-12,-9,3,-15,-11,-6,-1,0,11,2,-12,3,-6,6,0,-6,-12,-10,-12,6,5,-4,-5,-5,-4,-11,13,5,-2,-13,-3,-7,-15,8,-15,12,-13,0,-3,6,9,-8,-6,10,5,9,-11,0,7,-15,-8,-3,-4,-6,7,7,-2,-2,-11,3,0,-6,12,0,-13,4,-3,11,-11,1,2,13,8,4,9,-1,-2,5,14,12,5,13,-6,-13,-8,9,1,5,-8,-2,-6,-1]
 #A = [12,0,3,-14,5,-11,11,-5,-2,-1,6,-7,-10,1,4,1,1,9,-3,6,-15,0,6,1,6,-12,3,7,11,-6,-8,0,9,3,-7,-1,7,-10,1,13,-4,-7,-9,-7,9,3,1,-13,-3,13,8,-11,-9,-8,-3,4,-13,7,-11,5,-14,-4,-9,10,6,-9,-6,-9,-12,11,-11,-9,11,-5,0,-3,13,-14,-1,-13,7,-7,14,5,0,-4,-6,-6,-11,-2,14,-10,2,12,8,-7,-11,-13,-9,14,5,-5,-9,1,-2,6,5,-12,-1,-10,-9,-9,-10,12,11]
-A = [7,-1,14,-12,-8,7,2,-15,8,8,-8,-14,-4,-5,7,9,11,-4,-15,-6,1,-14,4,3,10,-5,2,1,6,11,2,-2,-5,-7,-6,2,-15,11,-6,8,-4,2,1,-1,4,-6,-15,1,5,-15,10,14,9,-8,-6,4,-6,11,12,-15,7,-1,-9,9,-1,0,-4,-1,-12,-2,14,-9,7,0,-3,-4,1,-2,12,14,-10,0,5,14,-1,14,3,8,10,-8,8,-5,-2,6,-11,12,13,-7,-12,8,6,-13,14,-2,-5,-11,1,3,-6]
-
+#A = [7,-1,14,-12,-8,7,2,-15,8,8,-8,-14,-4,-5,7,9,11,-4,-15,-6,1,-14,4,3,10,-5,2,1,6,11,2,-2,-5,-7,-6,2,-15,11,-6,8,-4,2,1,-1,4,-6,-15,1,5,-15,10,14,9,-8,-6,4,-6,11,12,-15,7,-1,-9,9,-1,0,-4,-1,-12,-2,14,-9,7,0,-3,-4,1,-2,12,14,-10,0,5,14,-1,14,3,8,10,-8,8,-5,-2,6,-11,12,13,-7,-12,8,6,-13,14,-2,-5,-11,1,3,-6]
+#A = [-4,-2,1,-5,-4,-4,4,-2,0,4,0,-2,3,1,-5,0]
+A = [-2,0,1,1,2]
 import time
 t = time.time()
-#print s.threeSum(A)
-s.threeSum(A)
+print s.threeSum(A)
+#s.threeSum(A)
 print (time.time() - t) * 1000000
