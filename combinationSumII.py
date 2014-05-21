@@ -3,43 +3,56 @@ class Solution:
     # @param target, integer
     # @return a list of lists of integers
     def combinationSum2(self, candidates, target):
-        def helper(num, target, start, visited):
-        	#print start
-        	if start <= len(num) and target == 0:
-        		#print '!'
-        		return [[]]
-        	elif start > len(num) or target < 0:
-        		return None
-        	result = set()
-        	for i in range(start,len(num)):
-        		#if i > 0 and num[i] == num[i-1] and visited[i-1]:
-        		#	continue
+        def helper(num, target, start):#, visited):
+            #print start
+            if start <= len(num) and target == 0:
+                #print '!'
+                return [[]]
+            elif start > len(num) or target < 0:
+                return None
+            result = []
+            i = start
+            while i < len(num):
+                #if i > 0 and num[i] == num[i-1] and visited[i-1]:
+                #    continue
                 # #change to while and move this to the tail of the loop
 
-        		#visited[i] = True
-        		residual = target - num[i]
-        		if residual < 0:
-        		 	return [list(i) for i in list(result)]
-        		# print '#',residual, num[i]
-        		temp = helper(num,residual, i+1,visited)
-        		#print temp, num[i]
-        		if temp:
-        			for j in temp:
-        				t = [num[i]] + j
-        				#print t
-        				result.add(tuple(t))
-        		# print result
-        		#visited[i] = False
-        	#print [list(i) for i in list(result)], '!'
-        	return [list(i) for i in list(result)]
+                #visited[i] = True
+                residual = target - num[i]
+                if residual < 0:
+                    return result
+                     #return [list(i) for i in list(result)]
+                #print '#',residual, num[i]
+                temp = helper(num,residual, i+1)#,visited)
+                #print temp, num[i]
+                if temp:
+                    for j in temp:
+                        t = [num[i]] + j
+                        #print t
+                        result.append(t)
+                        #result.add(tuple(t))
+                # print result
+                before = i
+                i += 1
+                #print '!'
+                while i < len(num) and num[i] == num[i-1]: # and visited[i-1]:
+                    #print '@',i
+                    i += 1
+                #print '#'
+                    #continue
+                #visited[before] = False
+            #print 'Finished'
+            #print [list(i) for i in list(result)], '!'
+            return result
+            #return [list(i) for i in list(result)]
 
         candidates.sort()
         #print candidates
-        res = helper(candidates, target, 0,[False for i in range(len(candidates))])
+        res = helper(candidates, target, 0)#,[False for i in range(len(candidates))])
         if not res:
-        	return []
+            return []
         else:
-        	return res
+            return res
 
 # Using hashset is cheating..... Rewrite!!
 
