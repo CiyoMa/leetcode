@@ -2,15 +2,14 @@ class Solution:
     # @param num, a list of integer
     # @return a list of lists of integer
     def subsetsWithDup(self, S):
-        def helper(start,visited):
+        def helper(start,visited,result):
         	if start == len(S):
         		return [[]]
 
-        	for i in range(start+1, len(S))
-
-
-
-
+        	visited[start] = True
+        	for i in range(start+1, len(S)):
+        		if S[i] == S[start]:
+        			result.append
 
         	if start > 0 and S[start] == S[start - 1] and not visited[start - 1]:
         		return helper(start, visited)

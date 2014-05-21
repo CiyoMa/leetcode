@@ -25,9 +25,13 @@ class Solution:
     			while start < end:
     				c = num[start]
     				d = num[end]
+    				if a + b + 2*c > target:
+    					break
+    				if a + b + 2*d < target:
+    					break
     				#print a,b,c,d
     				if a + b + c + d == target:
-    					result.append( (a,b,c,d) )
+    					result.append( [a,b,c,d] )
     					start += 1
     					end -= 1
     					while start < end and num[end] == num[end + 1]: end -= 1
@@ -40,6 +44,7 @@ class Solution:
     		i += 1
     	return result
 
+# Rewrite N^2 version
 
 
     # TLE
