@@ -14,6 +14,8 @@ class Solution:
         	else:
         		end = mid - 1
 
+#use division to avoid multiplication overflow
+
 s = Solution()
 print s.sqrt(10) == 3
 print s.sqrt(0.9) == 0
