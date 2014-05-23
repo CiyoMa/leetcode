@@ -1,5 +1,6 @@
 """
-Given two words (start and end), and a dictionary, find the length of shortest transformation sequence from start to end, such that:
+Given two words (start and end), and a dictionary, find the length of 
+shortest transformation sequence from start to end, such that:
 
 Only one letter can be changed at a time
 Each intermediate word must exist in the dictionary
@@ -24,4 +25,3 @@ class Solution:
     # @param dict, a set of string
     # @return an integer
     def ladderLength(self, start, end, dict):
-        
