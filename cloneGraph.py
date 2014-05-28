@@ -23,7 +23,7 @@ class Solution:
         	copy.neighbors = current.neighbors[:]
         	visited.add(current)
         	for neighbor in current.neighbors:
-        		if neighbor not in visited:
+        		if neighbor not in visited: #and neighbor not in frontier:
         			frontier.append(neighbor)
         			visited.add(neighbor)
         			# CAN NOT OMMIT THIS !!! Since duplicate edge like 1->4 and 1->4 can be in neighbors
@@ -37,7 +37,7 @@ class Solution:
         	current.neighbors = [dic[neighbor] for neighbor in current.neighbors]
         	visited.add(current)
         	for neighbor in current.neighbors:
-        		if neighbor not in visited:
+        		if neighbor not in visited: #and neighbor not in frontier:
         			frontier.append(neighbor)
         			visited.add(neighbor)
         			# CAN NOT OMMIT THIS !!! Since duplicate edge like 1->4 and 1->4 can be in neighbors
