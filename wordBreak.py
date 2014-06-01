@@ -20,7 +20,7 @@ class Solution:
         for i in range(1,len(s)+1):
             for j in range(i):
                 #print s[j:i]
-                if len(dp[j]) and s[j:i] in dict:
+                if len(dp[j])>0 and s[j:i] in dict:
                     dp[i].append(j)
         #print dp
 
@@ -96,6 +96,7 @@ st,dic = "fohhemkkaecojceoaejkkoedkofhmohkcjmkggcmnami", ["kfomka","hecagbngambi
 #st,dic = "leetecocode", ["leet", "leete","ec", "eco", "code"]
 st,dic = "ab", ["a","b"]
 st, dic ="a", []#["a"]
+st, dic ="leetcode", ['leet','code']#["a"]
 #st,dic = "cabceb", ['b','ab','abc','abce']
 s = Solution()
 print s.wordBreak(st, dic)

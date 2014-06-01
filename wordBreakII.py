@@ -65,7 +65,7 @@ class Solution:
         	for j in range(i-1,-1,-1):
         		#print j,i,s[j:i],
         		#tail = s[j:i]
-        		if len(dp[j]) and s[j:i] in dict:
+        		if len(dp[j])>0 and s[j:i] in dict:
         			#print True
         			dp[i].append(j)
         			continue
