@@ -3,11 +3,15 @@ class Solution:
     def maxArea(self, height):
         tempMax = 0
         n = len(height)
-        for i in range(n):
-        	if height[i] == 0:
-        		continue
-        	for j in range(max(tempMax/height[i], i+1),n):
-        		tempMax = max(min(height[i],height[j]) * (j-i), tempMax)
+        start = 0
+        end = n - 1
+        while start < end:
+        	tempMax = max(tempMax, min(height[start],height[end]) * (end - start))
+        	if height[start] <= height[end]:
+        		start += 1
+        	else:
+        		end -= 1
+        		
         return tempMax
 
 s = Solution()

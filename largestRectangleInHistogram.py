@@ -1,6 +1,27 @@
 class Solution:
     # @param height, a list of integer
     # @return an integer
+    def largestRectangleArea(self, height):
+        n = len(height)
+        largest = 0
+        leftMost = ['invalid' for i in range(n)]
+        rightMost = ['invalid' for i in range(n)]
+        
+        for i in range(n):
+        	if n * height[i] < largest:
+        		continue
+        	temp = height[i]
+        	left = i-1
+        	while left >= 0 and height[left] >= height[i]:
+        		left -= 1
+        		temp += height[i]
+        	right = i + 1
+        	while right < n and height[right] >= height[i]:
+        		right += 1
+        		temp += height[i]
+        	largest = max(largest, temp)
+        	#print height[i], temp, largest
+        return largest
 
     # # naive Divide and Conquer Worst Case similar to QuickSort, n^2, TLE
     # def largestRectangleArea(self, height):
