@@ -36,6 +36,7 @@ class Solution:
     				smaller = order[i]
     		i += 1
     	#print bigger.val, smaller.val
+    	#beware of the chain effect of the smaller one!!
     	bigger.val, smaller.val = smaller.val, bigger.val
     	#print [n.val for n in self.inOrder(root)]
     	return root
