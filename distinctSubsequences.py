@@ -15,18 +15,23 @@ Return 3.
 class Solution:
     # @return an integer
     def numDistinct(self, S, T):
-    	dic = {}
-    	n = len(S)
-    	for i in range(n):
-    		for j in range(i,n):
-    			dic[S[i:j]] = True
+    	def dp(sStart, tStart, memo = {}):
+    		if (sStart, tStart) in memo:
+    			return memo[(sStart, tStart)]
+    		if tStart == len(T):
+    			return 1
+    		num = 0
+    		for i in range(sStart, len(S)- (len(T) - tStart) + 1):
+    			
+    			if T[tStart] == S[i]:
+    				# print i, tStart
+    				# print T[tStart], S[i]
+    				num += dp(i+1, tStart+1, memo)
+    		memo[(sStart, tStart)] = num
+    		return num
+    	return dp(0,0)
 
-    	t = {}
-    	m = len(T)
-    	for i in range(m):
-    		for j in range(i,m):
-    			if not dic.get(T[i:j],False):
-    				t[T[i:j]] = True
-
-    	return len(t)
+S, T = "a red rabbbbit", "rabbit"
+s = Solution()
+print s.numDistinct(S, T)
 

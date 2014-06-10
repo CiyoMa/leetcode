@@ -18,7 +18,39 @@ class Solution:
     # @param cost, a list of integers
     # @return an integer
     def canCompleteCircuit(self, gas, cost):
-    	
+    	residual = [gas[i] - cost[i] for i in range(len(gas))]
+    	if sum(residual) < 0:
+    		return -1
+    	best = -1
+    	temp = 0
+    	for i in range(len(gas)):
+    		temp += residual[i]
+    		if temp < 0:
+    			temp = 0
+    			best = i
+
+    	return best+1
+
+
+
+
+    	start = [0 for i in range(len(gas))]
+    	end = [0 for i in range(len(gas))]
+    	temp = 0
+    	for i in range(len(gas)):
+    		start[i] = temp
+    		temp += residual[i]
+    	temp = 0
+    	for i in range(len(gas)-1,-1,-1):
+    		temp += residual[i]
+    		end[i] = temp
+    	#print residual, start, end
+    	for i in range(len(gas)):
+    		if start[i] <= 0 and abs(start[i]) <= end[i] and residual[i]>=0:
+    			return i
+    	return -1
+
+
     	# Naive Way - TLE
     	#
         # n = len(gas)
@@ -44,4 +76,7 @@ class Solution:
         # return -1
 
 s = Solution()
-print s.canCompleteCircuit([2,3,1],[1,4,1])
+gas = [1,2]
+costs = [2,1]
+gas, costs = [1,2,3,3], [2,1,5,1]#[2,4], [3,4]#[2,3,1],[1,4,1]
+print s.canCompleteCircuit(gas, costs)
