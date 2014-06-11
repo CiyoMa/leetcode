@@ -32,14 +32,45 @@ class Solution:
     def atoi(self, str):
         if str == ' ' or str == '':
             return 0
-        tail = len(str) - 1
-        while tail >= 0 and str[tail] == ' ':
-            tail -= 1
-        tail += 1
+
         start = 0
         while start < len(str) and str[start] == ' ':
             start += 1
-        start -= 1
+
+        tail = start
+        while tail < len(str) and str[tail] in '+-0123456789':
+            tail += 1
+        tail -= 1
+        # print start, tail
+
         if start >= tail:
-            return 0
-        return int(str)
+            if str[start] not in '0123456789':
+                return 0
+            return int(str[start])
+        sign = 1
+        if str[start] in '+-':
+            if str[start] == '-':
+                sign = -1
+            start += 1
+
+        result = 0
+        count = 0
+        while start <= tail:
+            if str[start] not in '0123456789':
+                return 0
+            result *= 10 
+            # print result, str[start]
+            if result >= 2147483640 or count == 10:
+                if (int(str[start]) >= 7 or count == 10) and sign == 1:
+                    return 2147483647
+                if (int(str[start]) >= 8 or count == 10)  and sign == -1:
+                    return -2147483648
+
+
+            result += int(str[start])
+            start += 1
+            count += 1
+        return sign * result
+
+s = Solution()
+print s.atoi("  -11919730356x")

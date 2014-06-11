@@ -7,4 +7,53 @@ class Solution:
     # @param matrix, a list of lists of 1 length string
     # @return an integer
     def maximalRectangle(self, matrix):
-        
+        def largestRectangleArea(height):
+            n = len(height)
+            largest = 0
+            leftMost = [i for i in range(n)]
+            rightMost = [i for i in range(n)]
+            
+            start = len(height) - 2
+            while start >= 0:
+                if height[start] == 0:
+                    start -= 1
+                    continue
+                lastRight = None
+                right = start + 1
+                while right < len(height) and height[right] >= height[start]: #and (right is None or lastRight != right):
+                    lastRight = right
+                    right = rightMost[right]
+                    if height[right] > height[start]:
+                        lastRight = right
+                        right += 1 
+                    elif height[right] == height[start]:
+                        lastRight = right
+                        break
+                if lastRight is not None:
+                    rightMost[start] = lastRight
+                start -= 1
+
+            start = 1
+            while start < len(height):
+                if height[start] == 0:
+                    start += 1
+                    continue
+                lastLeft = None
+                left = start - 1
+                while left >= 0 and height[left] >= height[start]: #and (lastLeft is None or lastLeft != left):
+                    lastLeft = left
+                    left = leftMost[left]
+                    if height[left] > height[start]:
+                        lastLeft = left
+                        left -= 1 
+                    elif height[left] == height[start]:
+                        lastLeft = left
+                        break
+                if lastLeft is not None:
+                    leftMost[start] = lastLeft
+                start += 1
+
+            # print leftMost, rightMost
+            for i in range(n):
+                largest = max(largest, height[i] * (rightMost[i] - leftMost[i] + 1))
+            return largest
