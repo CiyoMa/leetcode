@@ -52,9 +52,9 @@ class Solution:
                 return memo[(s1, s2)]
 
             assert len(s1) == len(s2)
-            if len(s1) == 2:
-                memo[(s1, s2)] = s1[1] == s2[0] and s2[1] == s1[0]
-                return s1[1] == s2[0] and s2[1] == s1[0]
+            # if len(s1) == 2:
+            #     memo[(s1, s2)] = s1[1] == s2[0] and s2[1] == s1[0]
+            #     return s1[1] == s2[0] and s2[1] == s1[0]
             if s1 == s2:
                 memo[(s1, s2)] = True
                 return True
@@ -85,7 +85,7 @@ class Solution:
             return False
         return dp(s1, s2)
 
-s1, s2 = "abcd", "bdac"#"abc", "acb" #"great", "rgtae"
+s1, s2 = "great", "rgtae"#"abc", "acb" #"great", "rgtae"
 s = Solution()
 print s.isScramble(s1,s2)
 
