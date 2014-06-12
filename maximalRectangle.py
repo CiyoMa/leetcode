@@ -57,3 +57,16 @@ class Solution:
             for i in range(n):
                 largest = max(largest, height[i] * (rightMost[i] - leftMost[i] + 1))
             return largest
+
+        if len(matrix) == 0:
+            return 0
+        height = [1 if matrix[0][i] == '1' else 0 for i in range(len(matrix[0]))]
+        area = largestRectangleArea(height)
+        for i in range(1,len(matrix)):
+        	for j in range(len(matrix[0])):
+        		if matrix[i][j] == '1':
+        			height[j] += 1
+        		else:
+        			height[j] = 0
+        	area = max(area, largestRectangleArea(height))
+        return area
