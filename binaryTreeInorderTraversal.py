@@ -26,26 +26,62 @@ class stack:
 class Solution:
     # @param root, a tree node
     # @return a list of integers
+    # def inorderTraversal(self, root):
+    #     result = []
+    #     s = stack()
+    #     s.push(root)
+    #     while root and not s.isEmpty():
+    #         node = s.pop()
+    #         while node:
+    #             if node.right:
+    #                 s.push(node.right)
+    #             s.push(node)
+    #             node = node.left
+
+    #         cur = s.pop()
+    #         while not s.isEmpty() and not cur.right:
+    #             result.append(cur.val)
+    #             cur = s.pop()
+
+    #         result.append(cur.val)
+    #         # print result
+            
+    #     return result
+#second best
+    # def inorderTraversal(self, root):
+    #     result = []
+    #     if root is None:
+    #         return result
+    #     s = stack()
+    #     node = root
+    #     while node is not None:
+    #         s.push(node)
+    #         node = node.left
+        
+    #     while not s.isEmpty():
+    #         node = s.pop()
+    #         result.append(node.val)
+    #         if node.right is not None:
+    #             node = node.right
+    #             while node is not None:
+    #                 s.push(node)
+    #                 node = node.left
+    #     return result
+#best
     def inorderTraversal(self, root):
         result = []
         s = stack()
-        s.push(root)
-        while root and not s.isEmpty():
-            node = s.pop()
-            while node:
-                if node.right:
-                    s.push(node.right)
+        node = root
+        
+        while not s.isEmpty() or node is not None:
+            if node is not None:
                 s.push(node)
                 node = node.left
-
-            cur = s.pop()
-            while not s.isEmpty() and not cur.right:
-                result.append(cur.val)
-                cur = s.pop()
-
-            result.append(cur.val)
-            # print result
-            
+            else:
+                node = s.pop()
+                result.append(node.val)
+                node = node.right
+                
         return result
 
     def preorderTraversal(self, root):
